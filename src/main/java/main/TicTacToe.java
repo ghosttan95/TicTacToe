@@ -7,19 +7,32 @@ public static int[][] ticbox;
 	public static int win(int [][]tic) {
 		//check all rows
 		//loop through rows from 0 to 3 and check if all the 3 places have same marks
- 		
-		
+ 		for( int row=0; row<3; row++ ) {
+ 			if( tic[row][0] == 1 && tic[row][1]== 1 && tic[row][2]== 1) {
+ 				return 1;
+ 			}
+ 			if( tic[row][0] == 2 && tic[row][1]== 2 && tic[row][2]== 2) {
+ 				return 2;
+ 			}
+ 		}
 		//check all cols
 		//loop through columns from 0 to 3 and check if all the 3 places have same marks
- 		
+ 		for( int col=0; col<3; col++ ) {
+ 			if( tic[0][col] == 1 && tic[1][col] == 1 && tic[2][col] == 1) {
+ 				return 1;
+ 			}
+ 			if( tic[0][col] == 2 && tic[1][col] == 2 && tic[2][col] == 2) {
+ 				return 2;
+ 			}
+ 		}
 		//check both diagonals 
-		
-		
-		
+ 		//first diagonal
+		if( (tic[0][0]==1 && tic[1][1]==1 && tic[2][2]==1) || (tic[0][2]==1 && tic[1][1]==1 && tic[2][0]==1 ) )
+			return 1;
+		//second diagonal
+		if( (tic[0][0]==2 && tic[1][1]==2 && tic[2][2]==2) || (tic[0][2]==2 && tic[1][1]==2 && tic[2][0]==2 ) )
+			return 2;
 		//write your code here !!!
-		
-		
-		
 		return 0;
 		
 	}
@@ -32,18 +45,23 @@ public static int[][] ticbox;
 			System.out.println("");
 		}
 	}
+	
 	public static boolean validate(int a1,int a2,int [][] tic) {
-		//check if a1 is between 0 & 3
-		//check if a2 is between 0 & 3
-		//check if the selected box is empty ie, already not marked by other player
-		//if all checks passed return true.
-		
-		
 		//Write your code here !!!
-		
-		
+		//check if a1 is between 0 & 3
+		if( a1>=0 && a1<3 ) {
+			//check if a2 is between 0 & 3
+			if( a2>=0 && a2<3 ) {
+				//check if the selected box is empty ie, already not marked by other player
+				if( tic[a1][a2]== 0 ) {
+					//if all checks passed return true.
+					return true;
+				}
+			}
+		}
 		return false;
 	}
+	
 	public static void main(String args[]) {
 		
 		ticbox = new int[3][3];
@@ -63,8 +81,8 @@ public static int[][] ticbox;
 				System.out.println("Player 1 Enter the box number");
 				printBox(ticbox);
 				Scanner sc = new Scanner(System.in);
-				int a1 = sc.nextInt();
-				int a2 = sc.nextInt();
+				int a1 = sc.nextInt();//row number of the box
+				int a2 = sc.nextInt();// column number of the box
 				boolean valid = validate(a1,a2,ticbox);
 				if(valid) {
 					ticbox[a1][a2] = 1;
@@ -75,7 +93,8 @@ public static int[][] ticbox;
 				else {
 					System.out.println("Please enter a valid position!!");
 				}
-			}else {
+			}
+			else {
 				System.out.println("Player 2 Enter the box number");
 				printBox(ticbox);
 				Scanner sc = new Scanner(System.in);
